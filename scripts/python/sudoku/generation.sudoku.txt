@@ -1,0 +1,103 @@
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+1. generation par casier indépendants
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+exemples de génération d'une grille de sudoku sur l'ensemble [1..4]
+
+grille du 1 grille du 2 grille du 3 grille du 4 grille finale
+=========== =========== =========== =========== ===========
+ 0 0 | 0 0   0 0 | 0 0   0 0 | 0 0   0 0 | 0 0   0 0 | 0 0
+ 0 0 | 0 0   0 0 | 0 0   0 0 | 0 0   0 0 | 0 0   0 0 | 0 0
+----------- ----------- ----------- ----------- -----------
+ 0 0 | 0 0   0 0 | 0 0   0 0 | 0 0   0 0 | 0 0   0 0 | 0 0
+ 0 0 | 0 0   0 0 | 0 0   0 0 | 0 0   0 0 | 0 0   0 0 | 0 0
+=========== =========== =========== =========== ===========
+
+Il y a une grille par chiffres et une grille finale.
+Au départ, chaque grille est vide
+Il y a 16 possiblités de commencer dans la grille 1.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+1.1 mettre un chiffre dans un casier
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+grille du 1 grille du 2 grille du 3 grille du 4 grille finale
+=========== =========== =========== =========== ===========
+ 1 1 | 1 1   0 0 | 2 2   0 3 | 0 0   0 0 | 4 0   1 0 | 0 0
+ 1 1 | 0 0   2 2 | 2 2   0 3 | 0 0   0 0 | 4 0   0 0 | 2 0
+----------- ----------- ----------- ----------- -----------
+ 1 0 | 0 0   0 0 | 2 0   3 3 | 0 0   0 0 | 4 4   0 0 | 0 0
+ 1 0 | 0 0   0 0 | 2 0   3 3 | 3 3   4 4 | 4 4   0 3 | 4 0
+=========== =========== =========== =========== ===========
+
+On insère un chiffre par casier.
+Dans chaque grille par chiffre, on biffe les lignes, les colonnes et les casiers occupés en plaçant le chiffre de la grille dans les emplacements biffés
+La grille finale est remplie.
+Il reste 6 possibilités par nombre par gille.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+1.2 mettre un chiffre dans un autre casier en faisant attention aux lignes et colonnes occupées
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+grille du 1 grille du 2 grille du 3 grille du 4 grille finale
+=========== =========== =========== =========== ===========
+ 1 1 | 1 1   2 2 | 2 2   0 3 | 0 3   4 0 | 4 0   1 2 | 0 0
+ 1 1 | 1 1   2 2 | 2 2   0 3 | 0 3   4 0 | 4 0   0 0 | 2 1
+----------- ----------- ----------- ----------- -----------
+ 1 0 | 0 1   0 2 | 2 0   3 3 | 3 3   4 4 | 4 4   4 0 | 0 3
+ 1 0 | 0 1   0 2 | 2 0   3 3 | 3 3   4 4 | 4 4   0 3 | 4 0
+=========== =========== =========== =========== ===========
+
+Dans chaque grille par chiffre, on biffe les lignes, les colonnes et les casiers occupés en plaçant le chiffre de la grille dans les emplacements biffés
+La grille finale est remplie.
+Il reste 4 possibilités par gille.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+1.3 mettre un chiffre dans un autre casier en faisant attention aux lignes et colonnes occupées
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+grille du 1 grille du 2 grille du 3 grille du 4 grille finale
+=========== =========== =========== =========== ===========
+ 1 1 | 1 1   2 2 | 2 2   3 3 | 0 3   4 4 | 4 4   1 2 | 0 4
+ 1 1 | 1 1   2 2 | 2 2   3 3 | 3 3   4 0 | 4 4   3 0 | 2 1
+----------- ----------- ----------- ----------- -----------
+ 1 1 | 1 1   0 2 | 2 2   3 3 | 3 3   4 4 | 4 4   4 1 | 0 3
+ 1 1 | 0 1   2 2 | 2 2   3 3 | 3 3   4 4 | 4 4   0 3 | 4 2
+=========== =========== =========== =========== ===========
+
+Dans chaque grille par chiffre, on biffe les lignes, les colonnes et les casiers occupés en plaçant le chiffre de la grille dans les emplacements biffés
+La grille finale est remplie.
+Il reste 1 possibilités par gille.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+1.4 terminer et vérifier
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+grille du 1 grille du 2 grille du 3 grille du 4 grille finale
+=========== =========== =========== =========== ===========
+ 1 1 | 1 1   2 2 | 2 2   3 3 | 3 3   4 4 | 4 4   1 2 | 3 4
+ 1 1 | 1 1   2 2 | 2 2   3 3 | 3 3   4 4 | 4 4   3 4 | 2 1
+----------- ----------- ----------- ----------- -----------
+ 1 1 | 1 1   2 2 | 2 2   3 3 | 3 3   4 4 | 4 4   4 1 | 1 3
+ 1 1 | 1 1   2 2 | 2 2   3 3 | 3 3   4 4 | 4 4   2 3 | 4 2
+=========== =========== =========== =========== ===========
+
+
+Dans chaque grille par chiffre, on biffe les lignes, les colonnes et les casiers occupés en plaçant le chiffre de la grille dans les emplacements biffés
+La grille finale est remplie.
+Il reste 0 possibilités par gille.
+
+Il est aussi possible de générer par ligne ou par colonnes. 
+Le nombre de pas dépend de l'ensemble de départ.
+Cette façon de faire peut aussi servir pour la résolution de sudoku.
+
+Approximation du total des possibilités :
+Cas pessimiste = 16 * 6 * 4 + 12 * 6 * 4 + 8 * 6 * 4 + 4 * 6 * 4 = 3840 possibilités
+
+
+Sources :
+http://www.geometer.org/mathcircles/sudoku.pdf
+http://en.wikipedia.org/wiki/Mathematics_of_Sudoku
+
+
+

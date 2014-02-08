@@ -1,0 +1,22 @@
+Traduction augmentée d'un court article trouvé sur 
+http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/365606
+
+Description de l'utilité des librairies SimpleHTTPServer et CGIHTTPServer.
+
+Les librairies SimpleHTTPServer et CGIHTTPServer sont des librairies standards.
+Ce petit howto révèle une face cachée des librairies : il est possible de les lancer en ligne de commande. 
+POur ce faire, il faut taper:
+$ python -m SimpleHTTPServer # nécessite python 2.4 ou plus
+ou bien en tapant:
+$ python -c "from SimpleHTTPServer import test; test()"
+
+Pour créer un serveur de fichier d'un répertoire, il suffit de se positionner dans le répertoire et de lancer une commande ci-dessus. Ainsi le répertoire courant est atteignable par le navigateur à l'adresse htp://localhost:8000.
+Pour tester un script cgi basé dans un répertoire /cgi-bin/, il faut se positionner devant le répertoire cgi-bin et lancer le serveur grâce à cet instruction:
+$ python -m CGIHTTPServer 9000 # le modificateur -m permet d'introduire un port, il est aussi valable pour SimpleHTTPServer
+* ne fonctionne pas sous windows *
+Les scripts sont atteignable par le navigateur à l'adresse:
+http://localhost:9000/cgi-bin/momScript.py
+Cette commande fonctionne aussi pour des cgi non python.
+
+L'avantage d'utiliser cette méthode pour les cgi réside dans le fait que les logs ne sont pas écrit dans un fichier mais directement visibles à l'écran. C'est très utile pour faire du débuggage.
+

@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1239861437 source:c:\users\jean\documents\projets\c\c\caculatrice\caculatrice\main.c
+	<curses.h>
+	<string.h>
+	<math.h>
+

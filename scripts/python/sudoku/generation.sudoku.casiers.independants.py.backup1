@@ -1,0 +1,91 @@
+# coding=UTF-8
+# génération des grilles du sudoku par casiers indépendants
+
+import math
+
+class gridModell(object):
+ def __init__(self,set=[]):
+  #self.set=set
+  #self.sqrt=math.sqrt(len(set))
+  #self.len=len(set)
+  modell=[]
+  for x in set:
+   line=[]
+   for z in set:
+    line.append(0)
+   modell.append(line)
+  self.modell=modell
+  
+  
+ def fill(self,value,position):
+  ret=True
+  line=int(position/len(self.modell))
+  col=position-line*len(self.modell)
+  if self.modell[line][col]==0:
+   self.modell[line][col]=value
+  else:
+   ret=False
+  return ret
+
+ def string(self):
+  return str(self.modell)
+
+ def getModell(self):
+  return self.modell
+
+ def toString(self):
+  ret=''
+  sqrt=math.sqrt(len(self.modell))-1
+  colIndex=0
+  for x in self.modell:
+   lineIndex=0
+   for z in x :
+    ret+=str(z)+' '
+    if lineIndex==sqrt:
+      ret+='| '
+    lineIndex+=1
+   ret+='\n'
+   if colIndex==sqrt:
+    ret+='----------\n'
+   colIndex+=1
+  return ret 
+
+
+#def findAllPermutations( set ,length=1):
+# # fonction recursive
+# ret=[set[0:len(set)-length+1]]
+# if len(set)>length:
+#  ret=[]
+#  for x in set:
+#   subset = []
+#   subset.extend( set )
+#   subset.remove( x )
+#   permut = findAllPermutations( subset ,length)
+#   #print permut 
+#   for z in permut:
+#    line=[x]
+#    line.extend(z)
+#    ret.append(line)
+# return ret
+
+set=[1,2,3,4]
+#permutations=findAllPermutations(set)
+grid1=gridModell(set)
+grid2=gridModell(set)
+grid3=gridModell(set)
+grid4=gridModell(set)
+gridFinal=gridModell(set)
+
+
+grid1.fill(1,0)
+grid2.fill(2,2)
+grid3.fill(3,8)
+grid4.fill(4,10)
+
+print grid1.toString()
+print grid2.toString()
+print grid3.toString()
+print grid4.toString()
+ 
+
+

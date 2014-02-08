@@ -1,0 +1,81 @@
+#!/bin/sh
+#set -x
+
+# script utilise pour faire un backup par ftp d'un serveur 
+# declenche par cronjob
+
+
+STARTSWICH='start_swich'
+TEMPDIR=/usr/backuptemp
+WOCHENTAG=`date '+%A'`
+HEUTE="`date '+%Y'`_`date '+%m'`_`date '+%d'`"
+VERZEICHNIS="artzh_"$HEUTE
+
+HOMEDIR=/usr/backup
+HTTPDLOGS=/var/log/httpd
+ZOPEINSTANCES=/home/zope/instances
+MYSQLVAR=/home/mysql/
+MYSQLVAR4=/var/lib/mysql
+HTDOCS=/srv/www
+TOMCATLOGS=/opt/tomcat/logs
+AWSTATSLOGS=/var/cache/awstats
+
+NAME_ZOPEINSTANCES=zope-instances.tar.gz
+NAME_HTTPD_LOGS=httpd-logs.tar.gz
+NAME_MYSQL_VAR=mysql-var.tar.gz
+NAME_MYSQL_VAR4=mysql-var4.tar.gz
+NAME_HTDOCS=htdocs.tar.gz
+NAME_TOMCAT_LOGS=tomcat-logs.tar.gz
+NAME_AWSTATS_LOGS=awstats-log.tar.gz
+
+
+if test -e "$HOMEDIR/$STARTSWICH"
+ then
+  echo Script lauft bereits schon
+  exit
+fi
+
+touch "$HOMEDIR/$STARTSWICH"
+
+if [ ! -d "$TEMPDIR" ] ; then
+    mkdir $TEMPDIR
+fi
+
+mkdir "$TEMPDIR/$HEUTE"
+
+nice -n 20 tar -cvzf "$TEMPDIR/$HEUTE/$NAME_HTTPD_LOGS" $HTTPDLOGS/*
+nice -n 20 tar -cvzf "$TEMPDIR/$HEUTE/$NAME_ZOPEINSTANCES" $ZOPEINSTANCES/*
+nice -n 20 tar -cvzf "$TEMPDIR/$HEUTE/$NAME_MYSQL_VAR" $MYSQLVAR/*
+nice -n 20 tar -cvzf "$TEMPDIR/$HEUTE/$NAME_MYSQL_VAR4" $MYSQLVAR4/*
+nice -n 20 tar -cvzf "$TEMPDIR/$HEUTE/$NAME_HTDOCS" $HTDOCS/*
+nice -n 20 tar -cvzf "$TEMPDIR/$HEUTE/$NAME_TOMCAT_LOGS" $TOMCATLOGS/*
+nice -n 20 tar -cvzf "$TEMPDIR/$HEUTE/$NAME_AWSTATS_LOGS" $AWSTATSLOGS/*
+
+WOCHENTAG='.'
+
+hostname="backup.t-servi.com"
+username="client"
+password="*******"
+nice -n 20 ftp -n $hostname <<EOF
+quote USER $username
+quote PASS $password
+binary
+prompt
+passiv on
+cd $WOCHENTAG
+mkdir $VERZEICHNIS
+cd $VERZEICHNIS
+put $TEMPDIR/$HEUTE/$NAME_HTTPD_LOGS $NAME_HTTPD_LOGS
+put $TEMPDIR/$HEUTE/$NAME_MYSQL_VAR $NAME_MYSQL_VAR
+put $TEMPDIR/$HEUTE/$NAME_MYSQL_VAR4 $NAME_MYSQL_VAR4
+put $TEMPDIR/$HEUTE/$NAME_ZOPEINSTANCES $NAME_ZOPEINSTANCES
+put $TEMPDIR/$HEUTE/$NAME_HTDOCS $NAME_HTDOCS
+put $TEMPDIR/$HEUTE/$NAME_TOMCAT_LOGS $NAME_TOMCAT_LOGS
+put $TEMPDIR/$HEUTE/$NAME_AWSTATS_LOGS $NAME_AWSTATS_LOGS
+quit
+EOF
+
+rm "$HOMEDIR/$STARTSWICH"
+rm -R $TEMPDIR/$HEUTE
+
+

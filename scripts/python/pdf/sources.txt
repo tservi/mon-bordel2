@@ -1,0 +1,4 @@
+sources d'inspiration:
+http://www.fpdf.org
+http://juanfernandoe.googlepages.com/ 
+http://www.fpdf.org/dl.php?id=94

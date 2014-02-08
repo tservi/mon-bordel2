@@ -1,0 +1,135 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<style>
+ul#primary-nav,
+ul#primary-nav ul {
+	width: 170px; 
+	margin: 0;
+	padding: 0;
+	background: #003399; /* IE6 Bug */
+	font-size: 100%;
+	}
+	
+ul#primary-nav {
+	float: left;
+	width: 100%;
+	}
+	
+ul#primary-nav:after {
+	content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+	}
+
+ul#primary-nav li {
+	position: relative;
+	list-style: none;
+	float: left;
+	width: 170px; /* Width of Menu Items */
+	}
+
+ul#primary-nav li a,
+ul#primary-nav li li a {
+	display: block;
+	text-decoration: none;
+	color: #fff;
+	padding: 5px;
+	}
+
+/* Fix IE. Hide from IE Mac \*/
+* html ul#primary-nav li { float: left; height: 1%; }
+* html ul#primary-nav li a { height: 1%; }
+/* End */
+
+ul#primary-nav ul {
+	position: absolute;
+	display: none;
+	}
+	
+ul#primary-nav ul ul {
+	left: 170px;
+	top: 0;
+	}
+
+ul#primary-nav li ul li a { padding: 2px 5px; } /* Sub Menu Styles */
+
+ul#primary-nav li:hover ul ul,
+ul#primary-nav li:hover ul ul ul,
+ul#primary-nav li.over ul ul,
+ul#primary-nav li.over ul ul ul { display: none; } /* Hide sub-menus initially */
+
+ul#primary-nav li:hover ul,
+ul#primary-nav li li:hover ul,
+ul#primary-nav li li li:hover ul,
+ul#primary-nav li.over ul,
+ul#primary-nav li li.over ul,
+ul#primary-nav li li li.over ul { display: block; } /* The magic */
+
+ul#primary-nav li.menuparent { background: transparent url(img/arrow-down.gif) right center no-repeat; }
+ul#primary-nav li li.menuparent { background: transparent url(img/arrow-right.gif) right center no-repeat; }
+
+ul#primary-nav li.menuparent:hover,
+ul#primary-nav li.over { background-color: #003399 !important; }
+
+ul#primary-nav li a:hover { color: #fff; text-decoration:none; }
+
+ul#primary-nav li.menuparent ul li a:link,ul#primary-nav li.menuparent ul li a:visited,ul#primary-nav li.menuparent ul li a:hover {
+	color:#6699FF;
+}
+</style>
+<script>
+function IEHoverPseudo() {
+
+	var navItems = document.getElementById("primary-nav").getElementsByTagName("li");
+	
+	for (var i=0; i<navItems.length; i++) {
+		if(navItems[i].className == "menuparent") {
+			navItems[i].onmouseover=function() { this.className += " over"; }
+			navItems[i].onmouseout=function() { this.className = "menuparent"; }
+		}
+	}
+
+}
+window.onload = IEHoverPseudo;
+</script>
+</head>	
+<body>
+		<div id="menu">
+			
+			<ul id="primary-nav">
+			
+				<li><a href="">Home</a></li>
+				
+				<li class="menuparent"><a href="#">Menu 1</a> 
+				<ul>
+                                                <li><a href="">Sous menu 1</a></li>
+                                                <li><a href="">Sous menu 2</a></li>
+                                                <li><a href="">Sous menu 3</a></li>
+ 				</ul>
+				</li>
+	
+				<li class="menuparent"><a href="#">Menu 2</a>
+				<ul>
+                                                <li><a href="">Sous menu 1</a></li>
+                                                <li><a href="">Sous menu 2</a></li>					</ul>
+				</li>
+				
+				<li class="menuparent"><a href="#">Menu 3</a>
+				<ul>
+                                                <li><a href="">Sous menu 1</a></li>
+                                                <li><a href="">Sous menu 2</a></li>
+                                                <li><a href="">Sous menu 3</a></li>
+				</ul>
+				</li>
+				
+				
+			</ul>
+			
+		</div>		
+</body>
+</html>
+

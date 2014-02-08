@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" horizontalScrollPolicy="off" verticalScrollPolicy="off" width="125" height="125" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" horizontalAlign="center">
+	<mx:Image width="75" height="75" source="{data.thumbnail.url}"/>	
+	<mx:Text text="{data.credit}"/>
+</mx:VBox>

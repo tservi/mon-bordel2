@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1243440150 source:c:\users\jean\documents\projets\c\testingandtesting\main.c
+	<stdio.h>
+
+1243440876 source:c:\users\jean\documents\projets\c\testingandtesting\error.c
+	<stdio.h>
+

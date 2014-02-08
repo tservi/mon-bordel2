@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>Hello World</title>
+    <script type="text/javascript">
+	var myAjax = ajax();
+
+	function ajax() {
+		var ajax = null;
+		if (window.XMLHttpRequest)
+		{
+			try
+			{
+				ajax = new XMLHttpRequest();
+			}
+			catch(e) {}
+		}
+
+		return ajax;
+	}
+
+	function cp_request(ville) {
+		myAjax.open("GET", "http://www.showbuzz.org/ajax/ville2cp.php?ville="+ville);
+		myAjax.onreadystatechange = cp_result;
+myAjax.send();
+	}
+
+	function cp_result() {
+		if (myAjax.readyState == 4) {
+			var myCp = myAjax.responseText;
+			document.getElementById('cp').value = myCp;
+		}
+	}
+
+	function getcp(ville) {
+		cp_request(ville);
+	}
+    </script>
+</head>
+<body>
+    <h1>Saisir le nom d'une ville</h1>
+	<input type="text" id="ville" onkeyup="getcp(this.value)" />
+	<input type="text" id="cp" value="Code postal" disabled="disabled" />
+</body>
+</html>
+

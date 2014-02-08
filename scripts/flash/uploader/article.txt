@@ -1,0 +1,126 @@
+
+====== Contrôle total du chargement grâce à flash ======
+
+
+ 
+**Il est pratique d'avoir un outil qui permet de donner la progression d'un chargement sur un serveur. Il est possible de faire rapidement un tel outil en flash. Je vous propose un tutoriel rapide et efficace sur la création de ce petit outil pour le player de la version 9 avec Action Script 3. **
+
+
+====== Déroulement  ======	
+
+Commençons dans un fichier vierge. Je vous propose tout d'abord de règler la longueur du document à 550 pixels et la lageur à 50 pixels. Ensuite  faire une "layer" nommée frame et une "layer" nommée script.
+Ensuite il est nécessaire d'avoir un bouton. Faites en un ou aller le chercher dans une librairie et appeler le "buttonPlay", par exemple. Pour l'affichage de la progression, une simple zone de texte dynamique appelée "uploadText" sera suffisante.
+
+Une fois que ces deux éléments graphiques sont en place, le travaille de codage peut commencer. Pour insérer du code aller sur la "frame" nommée script.
+
+Le premier pas trivial est de mettre un stop.
+
+Ensuite, pour déclencher l'appel au navigateur de fichier du client, il faut ajouter un gestionnaire d'événement sur le bouton "buttonPlay". Voici l'instruction qui permet de le faire :
+<code actionscript>
+buttonPlay.addEventListener(MouseEvent.CLICK, playNext)
+</code>
+Ainsi la fonction "playNext" permet de gèrer le click sur le bouton.
+
+Dans la fonction "playNext" on peut créer un objet "FileReference", lui associer un gestionnaire d'événement et appeler la méthode "browse" de l'objet:
+
+<code actionscript>
+var fileRef:FileReference = new FileReference();
+fileRef.addEventListener(Event.SELECT,selectFile);
+fileRef.browse();
+</code>
+
+Ainsi quand un utilisateur cliquera sur le bouton, il ouvrira une fenêtre lui permettant de choisir un unique fichier. Il est possible de choisir plusieurs fichier en utilisant l'objet FileReferenceList, mais ce n'est pas l'objet de cet article. 
+
+Si l'utilisateur choisit un fichier, a ce moment le player éxécute la fonction "selectFile" dont voici un fragment :
+<code actionscript>
+var myObj=event.target;
+if(myObj.name.length>0)
+{
+buttonPlay.visible=false;
+uploadText.text=myObj.name;
+myObj.addEventListener(Event.OPEN, openFile);
+myObj.addEventListener(ProgressEvent.PROGRESS, uploadProgress )
+myObj.addEventListener(Event.COMPLETE, uploadComplete)
+var myR:URLRequest = new URLRequest("testUpload")
+myObj.upload(myR);
+}
+</code>
+
+Cette fonction initialise une varible qui pointe vers l'objet FileReference. Ensuite il y a un contrôle sur le non du fichier, pour éviter d'uploader un fichier qui n'existe pas. Ce contrôle n'est peut être pas nécessaire. Ensuite le bouton est rendu invisible. On place le nom du fichier dans le texte dynamique. Trois nouveaux gestionnaires d'événements pour l'objet FileReference sont initialisés. On prépare l'url et finalement le fichier est chargé sur le serveur.
+
+
+Le suivi de la progression est assuré par les trois dernier gestionnaires. Ces gestionnaires ne font que simplement remettre à jour la zone de texte dynamique.
+
+	
+====== Code AS3 complet ======	
+<code actionscript>
+import flash.events.MouseEvent;
+import flash.events.Event;
+import flash.net.FileReference;
+
+function playNext(event:MouseEvent):void
+{
+	
+	function selectFile(event:Event):void
+	{
+		trace("dans selectFiles");
+		function openFile(myE:Event):void
+		{
+			trace("dans openFile");
+			uploadText.text=myE.target.name+' 0 % ';
+		}
+		function uploadProgress(myE:ProgressEvent):void
+		{
+			trace("dans uploadProgress");
+			trace(myE.toString())
+			var bL=int(myE.bytesLoaded/1024);
+			var bT=int(myE.bytesTotal/1024);
+			var myPercent=int(100*(bL/bT));
+			uploadText.text=myE.target.name+' '+bL+'M/'+bT+'M '+myPercent+'%';
+		}
+		function uploadComplete(myE:Event):void
+		{
+			trace("dans uploadComplete");
+			uploadText.text=myE.target.name+' 100 % '
+		}
+		var myObj=event.target;
+		if(myObj.name.length>0)
+			{
+				buttonPlay.visible=false;
+				uploadText.text=myObj.name;
+				myObj.addEventListener(Event.OPEN, openFile);
+				myObj.addEventListener(ProgressEvent.PROGRESS, uploadProgress )
+				myObj.addEventListener(Event.COMPLETE, uploadComplete)
+				var myR:URLRequest = new URLRequest("testUpload")
+				myObj.upload(myR);
+			}
+	}
+
+	trace("dans playNext");
+	var fileRef:FileReference = new FileReference();
+	fileRef.addEventListener(Event.SELECT,selectFile);
+	fileRef.browse();
+}
+
+buttonPlay.addEventListener(MouseEvent.CLICK, playNext)
+stop();
+</code>
+
+====== Conclusion ======
+
+L'upload du fichier est aisi mieux contrôlé. Dans ce programme j'ai imbriqué toutes les fonctions des gestionnaires d'événements, il est possible de les sortir. Le client envoye donc un fichier de façon controllée au script testUpload. Merci de votre attention. 
+
+
+====== Documentation ======
+
+[[http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/net/FileReference.html| FileReference]]
+
+[[http://www.adobe.com/devnet/actionscript/articles/event_handling_as3_05.html|Gestion des événements]]
+
+====== Source ======
+
+[[http://www.t-servi.com/cgi-bin/trac.cgi/browser/scripts/flash/uploader/uploder.files.fla?format=raw|Code source]]
+
+
+
+

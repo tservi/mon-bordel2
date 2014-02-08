@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Test</title>
+
+<script>
+function position(objName,x0,y0,radius,angle)
+{
+ obj=self.document.getElementById(objName);
+ newX=x0+radius*Math.cos(angle);
+ newY=y0-radius*Math.sin(angle);
+ obj.style.left=newX;
+ obj.style.top=newY;
+ //self.alert(newX+'/'+newY);
+}
+
+</script>
+
+</head>
+<body>
+
+<div  id="myImage1" style="position:absolute;left:100px;top:100px;">1
+<img src="image.gif" height="30px"/>
+</div>
+
+<div id="monitoring" style="position:absolute;left:50px;top:400px;boder-width:1px;border-color:lightblue;border-style:solid;width:250px;background-color:#eeeeee;">
+</div>
+
+<script>
+
+position('myImage1', 200, 200, 100,0 )
+
+</script>
+
+
+</body>
+</html>

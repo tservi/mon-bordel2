@@ -1,0 +1,10 @@
+tester l'application   :
+------------------------
+adl application.xml
+
+compiler l'application :
+------------------------
+1) générer le certificat :
+adt -certificate -cn SelfSigned 1024-RSA certif.pfx votreMotDePasse
+2) générer le byte code (!demande du mot de passe!):
+adt -package -storetype pkcs12 -keystore certif.pfx codepostal.air application.xml codepostal.html
