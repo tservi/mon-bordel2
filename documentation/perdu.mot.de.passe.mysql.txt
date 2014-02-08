@@ -1,0 +1,15 @@
+source : http://www.mydigitallife.info/2006/06/06/change-and-reset-mysql-root-password/
+
+
+Perdu le mot de passe mysql
+***************************
+
+
+pour debian 4 avec mysql 5:
+/etc/init.d/mysql stop
+mysqld_safe –-skip-grant-tables  &
+mysql -u root mysql
+UPDATE user SET Password=PASSWORD(’newrootpassword’) WHERE User=’root’;
+FLUSH PRIVILEGES;
+/etc/init.d/mysql stop
+/etc/init.d/mysql start

@@ -1,0 +1,1 @@
+c:\python25\python.exe ../../dev_appserver.py %1 .

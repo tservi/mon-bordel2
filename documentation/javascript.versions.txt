@@ -1,0 +1,16 @@
+Traduction rapide de http://ejohn.org/blog/versions-of-javascript/
+
+Quel navigateur supporte quelle version de Javascritp 
+
+    * IE 6-7 supporte JScript 5 (équivalent à ECMAScript 3, JavaScript 1.5)
+    * IE 8 supporte JScript 6 (équivalent à ECMAScript 3, JavaScript 1.5 - plus les bugs réparés dans JScript 5)
+    * Firefox 1.0 supporte JavaScript 1.5 (équivalent à ECMAScript 3)
+    * Firefox 1.5 supporte JavaScript 1.6 (1.5 + Array spéciaux + E4X + divers)
+    * Firefox 2.0 supporte JavaScript 1.7 (1.6 + générateurs + itérateurs + let + divers)
+    * Firefox 3.0 supporte JavaScript 1.8 (1.7 + générateurs + fermetures + divers)
+    * La prochaine version de Firefox supportera JavaScript 1.9 (1.8 + reste à déterminer)
+    * Opera supporte un language équivalent à ECMAScript 3 + Getters et Setters + divers
+    * Safari supporte un language équivalent à ECMAScript 3 + Getters and Setters + divers
+
+Javascript = http://developer.mozilla.org/en/docs/JavaScript_Language_Resources
+Ecmascript = http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf

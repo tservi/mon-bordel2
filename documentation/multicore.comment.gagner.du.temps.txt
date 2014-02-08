@@ -1,0 +1,30 @@
+comment optimiser un programme pour le multicore
+************************************************
+
+
+Attention au nouveaux multicore, il n'est pas si facile de faire un programme rentable.
+
+Prenons un exemple
+
+Voici une chaîne :
+abcdefgh
+
+Voici un tâche simple:
+Mettre les lettres en majuscules
+
+Voici la façon classique de faire:
+1) charger la chaine en mémoire
+2) parcourir la chaine et mettre les caractères en majuscule les uns aprés les autres
+
+Voici une façon en programmation parallèle ( il y en a d'autres )
+1) charger la chaine en mémoire
+2) découper la chaine en caractères ( c'est le grain le plus fin d'une chaîne )
+3) mettre les caractères en majuscules 
+4) recomposer la nouvelle chaine
+
+
+Pour que le programme parallèle soit rentable il faut que :
+le temps d'éxécution de l'exemple1 > le temps nécessaire à découper en grains + le temps d'éxécution de la tâche parallèle + le temps d'éxécution de la recomposition ou synchronisation
+
+Bonne chance avec vos programmes parallèles.
+

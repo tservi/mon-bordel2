@@ -1,0 +1,29 @@
+Étude du mouvement des yeux sur des lecteurs de page web.
+*********************************************************
+
+Voici quelques résultats:
+1) Le texte est plus attirant que les graphiques.
+2) Les accroches doivent être simples et directes, pas d'humour, pas de chichis.
+3) Le lecteur vagabonde le long d'une page web puis accroche sur les détails essentiels: 
+   le lecteur parcourt assez vite la page pour trouver les informations qui vont le retenir.
+4) Le lecteur fait des aller-retour entre différents sites, navigation entrelacée.
+
+Le site web devrait être construit pour les gens qui pratiquent cette navigation entrelacée:
+- aide maximale à l'orientation
+.. des accroches simples qui decrivent le contenu des pages
+.. des titres de page simples avec un mot clé qui permet de localiser l'onglet ou la fenêtre
+- les lecteurs n'enregistrent pas tous leur déplacements lors d'une navigation
+.. mettre des miettes de pain
+.. ne pas changer la couleur standard des liens, la reconnaissance du chemin en deviendrait plus difficile 
+- utiliser un vocabulaire standard pour éviter que l'utilisateur ne permute de contexte
+
+Implications
+
+- La crédibilité d'un site est inversément proportionnel à la quantité de slogan publicitaires
+- Les lecteurs passent peu de temps sur un site
+- Les lecteurs veulent lire peu de mots
+
+
+Source : http://www.useit.com/alertbox/20000514.html
+
+

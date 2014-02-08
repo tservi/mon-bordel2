@@ -1,0 +1,15 @@
+=== MVC ===
+***********
+
+Model Views Controllers
+
+
+
+Remarques d'utilisation:
+1) faire des nouveaux types plutôt que faire des contrôles sur des noms de base de données ( -- voilà bien une phrase que je ne comprends plus -- )
+2) un vue n'est pas un programme dans le MVC stric, mais pour moi un programme est autant efficace qu'un graphiste pour générer du HTML, alors pas de racisme.
+3) il est possible de modéliser une base SQL abstraite et d'exporter ou d'importer les éléments dans les différentes impémentations (MySql, Postgres, Oracle, ... )
+
+
+
+

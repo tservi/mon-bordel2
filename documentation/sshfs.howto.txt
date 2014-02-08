@@ -1,0 +1,55 @@
+source : http://pagesperso-orange.fr/jean-paul.davalan/faqs/hebergement.html
+
+
+a) vous devez disposer d'un point de montage (répertoire vide) par exemple ~/TMP/mnt
+   Si besoin est, créer le noeud manuellement "mknod -m 666 /dev/fuse c 10 229" 
+b) pour ne pas avoir à vous identifier à chaque connexion 
+	vérifiez que vous avez sur votre disque dur, dans votre répertoire personnel /home/toto 
+un répertoire ~/.ssh   (c.-à-d. /home/toto/.ssh)
+et un fichier  id_dsa.pub ou id_rsa.pub
+sinon utilisez ssh-keygen pour créer une clé privée et une clé publique (il crée aussi le répertoire ~/.ssh):
+
+toto:~$ ssh-keygen -t dsa
+Generating public/private dsa key pair.
+Enter file in which to save the key (/home/toto/.ssh/id_dsa):
+Created directory '/home/toto/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/toto/.ssh/id_dsa.
+Your public key has been saved in /home/toto/.ssh/id_dsa.pub.
+The key fingerprint is:
+...
+
+etc.
+(faites [entrée] à chaque demande)
+
+c) allez par ftp ou autrement sur votre site et créez aussi un répertoire /.ssh dans lequel vous
+placez un fichier
+authorized_keys
+(vide au départ) dans lequel vous avez recopié votre clé publique (un copier-coller) qui se présente ainsi
+ssh-rsa AAA... (les . sont des caractères) ...
+...== toto@ordi9
+
+(pour plusieurs utilisateurs, autant de clés les unes à la suite des autres)
+(impossible d'utiliser ssh-copy-id pour faire ce travail sur le site distant)
+
+Ensuite pour monter votre espace 1and1 dans l'un de vos répertoires :
+sshfs u34507621@richissime.fr: /home/toto/TMP/mnt
+
+Si vous avez des problèmes d'uid gid 
+faites : ls -ln 
+dans l'un de vos répertoires pour les déterminer (on supposera que ce sont 1004 et 1004)
+drwxr-xr-x 1 1004 1004 4096 2006-11-03 00:11 ..
+
+le sshfs amélioré devient :
+sshfs -o uid=1004,gid=1004 u34507621@richissime.fr: /home/toto/TMP/mnt
+
+vous pouvez trouver intéressant de créer un alias en plaçant dans ~/.bashrc
+alias sshsite='sshfs -o uid=1004,gid=1004 u34507621@richissime.fr: /home/toto/TMP/mnt"
+
+il vous suffira de taper : sshsite pour effectuer le montage.
+
+pour démonter :
+fusermount -u /home/toto/TMP/mnt
+
+

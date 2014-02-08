@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<!-- http://memoire-associative.appspot.com/crossdomain.xml -->
+<cross-domain-policy>
+  <allow-access-from domain="*" secure="false" />
+</cross-domain-policy>

@@ -1,0 +1,119 @@
+source : http://www.expreg.com/symbole.php
+
+Les Symboles dans les Expressions Régulières
+
+Quelques explications sur les différents symboles utilisés dans les expressions régulières.
+
+Une des premières choses à réaliser dans la conception d'une expression régulière, c'est de définir le motif (pattern)
+
+Pour construire ces motifs, vous avez besoin de créer une structure formée de caractères littéraux, puis de symboles qui sont définis en tant que métacaractères et délimiteurs et qui seront utilisés séparément ou en combinaison à l'intérieur d'un même groupement ou d'une classe.
+
+
+1) Les caractères littéraux
+On appelle littéral une valeur qui est écrite exactement comme elle est interprétée.
+Exemple :
+
+Littéraux 	Signification
+a 		correspond à la lettre "a" et rien d'autre
+chat 		correspond au mot "chat" et rien d'autre
+toto 		correspond au mot "toto" et rien d'autre
+
+
+Vous constatez que les littéraux permettent une identification exacte et précise du motif recherché. L'intérêt des expressions régulières ne serait pas bien grand si elles étaient limitées à cette seule possibilité. 
+
+2) Les symboles de début et fin de chaine et le point .
+L'accent circonflexe ^ et le symbole dollar $ et enfin le point .
+
+Symbole 	Description
+^ 		Indique le début de la chaine - exemple ^chat reconnaît une ligne qui commence par chat
+$ 		Indique la fin de la chaine - exemple : chat$ reconnaît une ligne qui finit par chat
+. 		Le point indique n'importe quel caractère
+
+
+3) Les symboles quantificateurs
+Ils sont au nombre de trois :
+le point d'interrogation (?), l'étoile (*) et le plus (+)
+
+Symbole 	Description
+* 		Indique 0, 1 ou plusieurs occurences du caractère ou de la classe précedente
++ 		Indique une ou plusieurs occurences du caractère ou de la classe précedente
+? 		Indique 0 ou une occurence du caractère ou de la classe précedente
+
+
+
+Exemple :
+a* correspond à aucune ou plusieurs occurences de la lettre (a)
+soit pas de a, ou a, aa, aaa, aaaa, etc...
+a+ correspond à une ou plusieurs occurences de la lettre (a)
+soit au moins un a ou aa, aaa, aaaa, etc...
+a? correspond à 0 ou une seule occurence de la lettre (a)
+soit a ou pas de a
+
+4) Les intervalles de reconnaissance
+Ce sont les accolades { }
+
+Exemple 	Signification
+a{3} 	correspond exactement à aaa
+a{2,} 	correspond à un minimum de deux a consécutifs
+soit aa, aaa, aaaaa....
+a{2,4} 	correspond uniquement à aa, aaa, aaaa
+
+
+5) Les classes de caractères
+Délimitées grâce aux crochets [ ]
+
+Exemple 	Signification
+[..-..] 		Le tiret représente l'intervalle à l'intérieur de la classe
+Il s'agit d'un métacaractère s'il est placé dans cette position. Pour permettre sa lecture en tant que caractère "tiret" il convient de le placer en début de la classe comme ceci [-....]
+br[iu]n 	ce qui signifie, trouver br suivi de i ou de u suivi de n comme brun ou brin
+<h[123456]> 	exemple de recherche sur une balise de titre
+<h1> <h2> <h3>, etc...
+
+
+6) Les classes pré-définies
+
+Classe 	Signification
+[[:alpha:]] 	n'importe quelle lettre
+[[:digit:]] 	n'importe quel chiffre
+[[:xdigit:]] 	caractères héxadécimaux
+[[:alnum:]] 	n'importe quelle lettre ou chiffre
+[[:space:]] 	n'importe quel espace blanc
+[[:punct:]] 	n'importe quel signe de ponctuation
+[[:lower:]] 	n'importe quelle lettre en minuscule
+[[:upper:]] 	n'importe quelle lettre capitale
+[[:blank:]] 	espace ou tabulation
+[[:graph:]] 	caractères affichables et imprimables
+[[:cntrl:]] 	caractères d'échappement
+[[:print:]] 	caractères imprimables exceptés ceux de contrôle
+
+
+7) L'alternative, l'intervalle et la classe complémentée
+Réalisé avec la barre | et le tiret - et l'accent circonflexe ^ à l'intérieur des crochets [ ]
+La barre verticale | peut également être positionnée entre des parenthèses dans la recherche du motif (voir * dans le tableau exemple)
+Exemple :
+
+Exemple 	Signification
+<h[1-6]> 	intervalle de recherche de 1 à 6 - affichera les balises de titre <h1> <h2> etc... jusque <h6>
+[0-9] 	tous les chiffres de 0 à 9, etc...
+p(ai|i)n 	la barre verticale détermine une alternative
+ce qui signifie tout ce qui s'écrit pain ou pin
+L'alternative dans le motif lui-même
+^(De|A):@ 	détermine une alternative dans le motif
+ce qui signifie tout ce qui commence par De:@ ou A:@
+La classe complémentée
+[^1] 	classe complémentée ce qui signifie reconnaître tout sauf ce qui est énuméré, ici, tout sauf le chiffre 1
+[^1-6] 	classe complémentée ce qui signifie reconnaître tout sauf ce qui est énuméré, ici, tout sauf les chiffres de 1 à 6
+
+
+Tableau récapitulatif
+
+. 	le point 	n'importe quel caractère
+[...] 	classe de caractères 	tous les caractères énumérés dans la classe
+[^...] 	classe complémentée 	Tous les caractères sauf ceux énumérés
+^ 	circonflexe 	positionne le début de la chaine, la ligne...
+$ 	dollar 	marque la fin d'une chaine, ligne...
+| 	barre verticale 	alternative - ou reconnaît l'un ou l'autre
+(...) 	parenthèse 	utilisée pour limiter la portée d'un masque ou de l'alternative
+* 	astérisque 	0, 1 ou plusieurs occurences
++ 	le plus 	1 ou plusieurs occurence
+? 	interrogation 	0 ou 1 occurence

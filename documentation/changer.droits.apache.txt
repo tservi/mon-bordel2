@@ -1,0 +1,26 @@
+Manipulation depuis le compte root:
+# source : http://www.commentcamarche.net/forum/affich-6836417-utiliser-commandes-root-sous-apache
+
+cd /var/www
+mkdir /var/www/create
+chown -R www-data create
+usermod -d /var/www/create/ www-data
+usermod -s /bin/sh www-data
+su www-data
+sh-3.1$ cd create
+sh-3.1$ ssh-keygen -f key_apache -t rsa
+sh-3.1$ exit
+usermod -d /var/www/ www-data
+mkdir .ssh
+cd .ssh
+cp -R ../create/key* .
+cp -R key_apache* /root/.ssh/.
+cp -R key_apache.pub authorized_keys
+ssh -i key_apache root@artification2 pwd
+
+
+
+
+
+
+
